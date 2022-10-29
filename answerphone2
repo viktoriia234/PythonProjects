@@ -1,0 +1,16 @@
+from task import *
+while True:
+    s = input()
+    if s == 'stop':
+        break
+    b = ['Расп', 'расп', 'Дан', 'дан', 'Стои', 'стои', 'Адр', 'адр', 'Инф', 'инф']
+    if b[0] in s or b[1] in s:
+        print(timetable())
+    if b[2] in s or b[3] in s:
+        print(data())
+    if b[4] in s or b[5] in s:
+        print(price())
+    if b[6] in s or b[7] in s:
+        print(address())
+    if b[8] in s or b[9] in s:
+        print(info())
