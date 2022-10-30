@@ -1,0 +1,7 @@
+def colors(amount, **kwargs):
+    print(f'Цвета: {amount}')
+    for color,number in kwargs.items():
+        print(f'{color}: {number}')
+
+amount = int(input('Кол-во цветов: '))
+colors(amount, цвет1 = 1, цвет2 = 5, цвет3 = 9)
