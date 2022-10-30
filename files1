@@ -1,0 +1,5 @@
+with open('file.1.txt', 'w+') as f:
+    f.write('Я гений и стараюсь учить питон')
+    f.seek(0)
+    symbols = f.read(7)
+    print(symbols)
