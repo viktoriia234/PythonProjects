@@ -1,0 +1,8 @@
+def summa(a=0.0):
+    n = input('Число: ')
+    if n == '':
+        return a
+    else:
+        a += float(n)
+        return summa(a)
+print(summa())
