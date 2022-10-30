@@ -1,0 +1,9 @@
+from time import *
+from random import *
+start = input('Введите "start" для начала работы или "off" для завершения: ')
+if start == 'start':
+    print('Подбрасываю кубики')
+    sleep(2)
+    print(randint(1,6), randint(1,6))
+else:
+    print('Работа программы завершена')
