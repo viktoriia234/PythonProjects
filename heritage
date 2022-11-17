@@ -1,0 +1,12 @@
+class Magician(Hero):
+    def hello(self):
+        print('-> НОВЫЙ ГЕРОЙ. Верхом на коне появился бравый воин по имени',self.name)
+        self.print_info()
+        sleep(4)
+
+    def attack(self, enemy):
+        print('-> УДАР! Храбрый воин', self.name, 'атакует', enemy.name, 'мечом')
+        enemy.armor -= 15
+        if enemy.armor < 0:
+            enemy.health += enemy.armor
+            enemy.armor = 0
