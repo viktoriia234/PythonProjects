@@ -1,0 +1,23 @@
+class Bank:
+    def __init__(self, name, pasport, balance):
+        self.name = name
+        self.pasport = pasport
+        self.balance = balance
+    def private_1(self):
+        return self.pasport
+    def private_2(self):
+        return self.balance
+    def smenapasporta(self, parol):
+        if parol == 123456:
+            print('Введите новый номер паспорта')
+            new_pasport = int(input())
+            self.pasport = new_pasport
+            return self.pasport
+    def ismenabalance(self, new_balance):
+        if new_balance>0:
+            print('Измение баланса')
+            self.balance = new_balance
+            return self.balance
+f1=Bank('Виктория', 68494, 334)
+print(f1.smenapasporta(12345))
+print(f1.ismenabalance(678))
