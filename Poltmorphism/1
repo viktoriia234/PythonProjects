@@ -1,0 +1,21 @@
+class Duck():
+    def krya(self):
+        print('Кря-Кря')
+
+    def clothes(self):
+        print('На вас красивые туфли. Кря-кря-кря')
+
+class Human():
+    def krya(self):
+        print('Я умею крякать: КРЯ-КРЯ!')
+
+    def clothes(self):
+        print('На мне красивая шляпа')
+
+def main():
+    test = [Duck(), Human()]
+    for i in test:
+        i.krya()
+        i.clothes()
+
+main()
