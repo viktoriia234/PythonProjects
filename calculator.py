@@ -1,51 +1,54 @@
-from PyQt6.QtWidgets import QApplication, QWidget, QLineEdit, QGridLayout, QPushButton
+import sys
+from PyQt5.QtCore import QSignalMapper
+from PyQt5.QtWidgets import *
 
-class Calculator(QWidget):
-    def init(self):
-        super().init()
-        self.initUI()
 
-    def initUI(self):
-        self.display = QLineEdit(self)
-        self.display.setReadOnly(True)
-        self.grid = QGridLayout()
+class Window(QWidget):
+    def __init__(self, parent=None):
+        super().__init__()
+        grid = QGridLayout(self)
+        mapper = QSignalMapper(self)
+        btns = (('1', '2', '3', '+'),
+                ('4', '5', '6', '-'),
+                ('7', '8', '9', '*'),
+                ('0', '.', '=', '/'),
+                )
+        self.line = QLineEdit()
+        self.flag = False
+        grid.addWidget(self.line, 0, 0, 1, 4)
+        for row in range(4):
+            for col in range(4):
+                button = QPushButton(btns[row][col])
+                grid.addWidget(button, row + 1, col)
+                button.clicked.connect(mapper.map)
+                mapper.setMapping(button, button.text())
+        mapper.mapped[str].connect(self.on_mapped)
 
-        buttons = ["7", "8", "9", "+",
-                   "4", "5", "6", "-",
-                   "1", "2", "3", "*",
-                   "0", ".", "=", "/", "C"]
-
-        row = 1
-        col = 0
-        for button in buttons:
-            if col > 3:
-                col = 0
-                row += 1
-
-            btn = QPushButton(button, self)
-            btn.clicked.connect(lambda _, b=button: self.append_display(b))
-            self.grid.addWidget(btn, row, col)
-            col += 1
-
-        self.grid.addWidget(self.display, 0, 0, 1, 4)
-        self.setLayout(self.grid)
-        self.setGeometry(300, 300, 300, 300)
-        self.setWindowTitle("Calculator")
-        self.show()
-
-    def append_display(self, b):
-        if b == "=":
-            try:
-                result = eval(self.display.text())
-                self.display.setText(str(result))
-            except:
-                self.display.setText("Error")
-        elif b == "C":
-            self.display.clear()
+    def on_mapped(self, val):
+        if val == '=':
+            self.flag = True
+            txt = self.line.text()
+            if '+' in txt:
+                arr = [float(i) for i in txt.split('+')]
+                self.line.setText(str(arr[0] + arr[-1]))
+            elif '-' in txt:
+                arr = [float(i) for i in txt.split('-')]
+                self.line.setText(str(arr[0] - arr[-1]))
+            elif '*' in txt:
+                arr = [float(i) for i in txt.split('*')]
+                self.line.setText(str(arr[0] * arr[-1]))
+            elif '/' in txt:
+                arr = [float(i) for i in txt.split('/')]
+                self.line.setText(str(arr[0] / arr[-1]))
         else:
-            self.display.insert(b)
+            if self.flag:
+                self.line.clear()
+                self.flag = False
+            self.line.setText(self.line.text() + val)
+
 
 if __name__ == "__main__":
-    app = QApplication([])
-    calculator = Calculator()
-    app.exec()
+    app = QApplication(sys.argv)
+    window = Window()
+    window.show()
+    sys.exit(app.exec_())
