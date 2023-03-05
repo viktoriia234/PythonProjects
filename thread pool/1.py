@@ -19,7 +19,7 @@ def remove_student_from_queue():
         else:
             break
 
-student_queue.put("Хильков")
+student_queue.put("Баранова")
 student_queue.put("")
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
