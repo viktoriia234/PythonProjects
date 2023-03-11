@@ -18,12 +18,12 @@ def create_file(queue):
 if __name__ == "__main__":
     queue = queue.Queue()
 
-    # Read names from file and put them in queue
+
     read_thread = threading.Thread(target=read_names, args=("Names.txt", queue))
     read_thread.start()
     read_thread.join()
 
-    # Create a thread pool and run create_file for each path in the queue
+
     with concurrent.futures.ThreadPoolExecutor() as executor:
         tasks = []
         while not queue.empty():
